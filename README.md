@@ -34,7 +34,7 @@
 ## Screenshots
 
 ### Homepage  
-![Homepage](screenshots\home.png)
+![Homepage](screenshots/home.png)
 
 ### Admin page  
 ![Admin](screenshots\admin.PNG)
