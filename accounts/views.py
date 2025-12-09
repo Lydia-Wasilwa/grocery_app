@@ -3,6 +3,8 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from orders.models import Order
+from .forms import UserUpdateForm
+from .models import Notification
 
 def register(request):
     if request.method == 'POST':
@@ -17,6 +19,25 @@ def register(request):
 
 @login_required
 def profile(request):
-    # Fetch orders belonging to the logged-in user
+    if request.method == 'POST':
+        user_form = UserUpdateForm(request.POST, instance=request.user)
+        if user_form.is_valid():
+            user_form.save()
+            messages.success(request, 'Your profile has been updated!')
+            return redirect('profile')
+    else:
+        user_form = UserUpdateForm(instance=request.user)
+
+    # 2. Fetch Data
     orders = Order.objects.filter(user=request.user).order_by('-created_at')
-    return render(request, 'accounts/profile.html', {'orders': orders})
+    notifications = Notification.objects.filter(user=request.user).order_by('-created_at')
+    
+    # 3. Mark notifications as read (Optional logic, or do it via a button)
+    # notifications.update(is_read=True) 
+
+    context = {
+        'orders': orders,
+        'user_form': user_form,
+        'notifications': notifications
+    }
+    return render(request, 'accounts/profile.html', context)

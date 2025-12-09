@@ -1,4 +1,17 @@
 from django.contrib import admin
-from .models import Product, Category
-admin.site.register(Category)
-admin.site.register(Product)
+from .models import Category, Product
+
+@admin.register(Category)
+class CategoryAdmin(admin.ModelAdmin):
+    list_display = ["name", "slug"]
+    prepopulated_fields = {"slug": ("name",)}
+
+@admin.register(Product)
+class ProductAdmin(admin.ModelAdmin):
+    list_display = ["name", "price", "available", "created"]
+    list_filter = ["available", "created"]
+    list_editable = ["price", "available"]
+    prepopulated_fields = {"slug": ("name",)}
+    
+    # REMOVED: autocomplete_fields = ['category'] 
+    # This restores the standard dropdown with the (+) button

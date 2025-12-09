@@ -1,0 +1,135 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <div>
+        <h2 class="fw-bold"><i class="bi bi-speedometer2"></i> Store Manager</h2>
+        <p class="text-muted">Overview of store performance and inventory.</p>
+    </div>
+    <a href="{% url 'product_create' %}" class="btn btn-success-custom">
+        <i class="bi bi-plus-lg"></i> Add New Product
+    </a>
+</div>
+
+<div class="row mb-5">
+    <div class="col-md-4">
+        <div class="card bg-primary text-white shadow-sm border-0">
+            <div class="card-body">
+                <h3>{{ total_orders }}</h3>
+                <p class="mb-0"><i class="bi bi-receipt"></i> Total Orders</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card bg-success text-white shadow-sm border-0">
+            <div class="card-body">
+                <h3>{{ paid_orders }}</h3>
+                <p class="mb-0"><i class="bi bi-cash-coin"></i> Paid Orders</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card bg-dark text-white shadow-sm border-0">
+            <div class="card-body">
+                <h3>{{ total_products }}</h3>
+                <p class="mb-0"><i class="bi bi-box-seam"></i> Products in Stock</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card shadow-sm mb-5 border-0">
+    <div class="card-header bg-white py-3">
+        <h5 class="mb-0 fw-bold">Recent Customer Orders</h5>
+    </div>
+    <div class="table-responsive">
+        <table class="table table-hover align-middle mb-0">
+            <thead class="table-light">
+                <tr>
+                    <th>Order ID</th>
+                    <th>Customer</th>
+                    <th>Address</th>
+                    <th>Total</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for order in recent_orders %}
+                <tr>
+                    <td>#{{ order.id }}</td>
+                    <td>
+                        <strong>{{ order.full_name }}</strong><br>
+                        <small class="text-muted">{{ order.email }}</small>
+                    </td>
+                    <td><small>{{ order.address }}</small></td>
+                    <td>${{ order.get_total_cost }}</td>
+                    <td>
+                        {% if order.paid %}
+                        <span class="badge bg-success">Paid</span>
+                        {% else %}
+                        <span class="badge bg-warning text-dark">Pending</span>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="5" class="text-center py-3">No orders yet.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="card shadow-sm border-0">
+    <div class="card-header bg-white py-3">
+        <h5 class="mb-0 fw-bold">Product Inventory</h5>
+    </div>
+    <div class="table-responsive">
+        <table class="table align-middle mb-0">
+            <thead class="table-light">
+                <tr>
+                    <th>Product</th>
+                    <th>Price</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for product in all_products %}
+                <tr>
+                    <td>{{ product.name }}</td>
+                    <td>${{ product.price }}</td>
+                    <td>
+                        {% if product.available %}
+                        <span class="text-success"><i class="bi bi-check-circle-fill"></i> In Stock</span>
+                        {% else %}
+                        <span class="text-danger"><i class="bi bi-x-circle-fill"></i> Out of Stock</span>
+                        {% endif %}
+                    </td>
+                    <td>
+                        <a href="{% url 'product_update' product.pk %}" class="btn btn-sm btn-outline-primary">Edit</a>
+                        <a href="{% url 'product_delete' product.pk %}" class="btn btn-sm btn-outline-danger">Delete</a>
+                    </td>
+                    <td>#{{ order.id }}</td>
+                    <td>
+                        {% if order.paid %}
+                        <span class="badge bg-success">Paid</span>
+                        <a href="{% url 'update_order_status' order.id 'shipped' %}" class="btn btn-sm btn-outline-dark"
+                            title="Notify: Received">
+                            <i class="bi bi-box-seam"></i> Notify Received
+                        </a>
+                        {% else %}
+                        <span class="badge bg-warning text-dark">Pending</span>
+                        <a href="{% url 'update_order_status' order.id 'paid' %}" class="btn btn-sm btn-outline-success"
+                            title="Mark Paid">
+                            <i class="bi bi-check-lg"></i> Mark Paid
+                        </a>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}

@@ -1,21 +1,77 @@
 {% extends 'base.html' %}
+
 {% block content %}
-<div class="row mt-5">
-    <div class="col-md-6">
-        {% if product.image %}
-        <img src="{{ product.image.url }}" class="img-fluid rounded shadow">
-        {% endif %}
-    </div>
-    <div class="col-md-6">
-        <h1>{{ product.name }}</h1>
-        <h3 class="text-success">${{ product.price }}</h3>
-        <p class="lead">{{ product.description }}</p>
-        <hr>
-        <form action="{% url 'cart_add' product.id %}" method="post" class="d-flex gap-2">
-            {% csrf_token %}
-            <input type="number" name="quantity" value="1" min="1" class="form-control w-25">
-            <button type="submit" class="btn btn-success btn-lg">Add to Cart</button>
-        </form>
+<div class="container mt-5">
+    
+    <nav aria-label="breadcrumb" class="mb-4">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'product_list' %}" class="text-decoration-none text-muted">Home</a></li>
+            <li class="breadcrumb-item"><a href="{% url 'product_list' %}?category={{ product.category.id }}" class="text-decoration-none text-muted">{{ product.category.name }}</a></li>
+            <li class="breadcrumb-item active" aria-current="page">{{ product.name }}</li>
+        </ol>
+    </nav>
+
+    <div class="card shadow-lg border-0 overflow-hidden">
+        <div class="row g-0">
+            <div class="col-md-6 bg-light d-flex align-items-center justify-content-center" style="min-height: 400px;">
+                {% if product.image %}
+                    <img src="{{ product.image.url }}" class="img-fluid" style="max-height: 400px; width: auto; object-fit: contain;" alt="{{ product.name }}">
+                {% else %}
+                    <i class="bi bi-image text-muted" style="font-size: 5rem;"></i>
+                {% endif %}
+            </div>
+
+            <div class="col-md-6">
+                <div class="card-body p-5">
+                    <h5 class="text-muted text-uppercase small fw-bold mb-2">{{ product.category.name }}</h5>
+                    <h1 class="fw-bold mb-3">{{ product.name }}</h1>
+                    
+                    <div class="mb-4">
+                        <span class="display-6 fw-bold text-success">${{ product.price }}</span>
+                    </div>
+
+                    <p class="lead text-muted mb-4">{{ product.description }}</p>
+
+                    <div class="mb-4">
+                        {% if product.available %}
+                            <div class="badge bg-success bg-opacity-10 text-success px-3 py-2 rounded-pill mb-3">
+                                <i class="bi bi-check-circle-fill me-1"></i> In Stock
+                            </div>
+
+                            <hr>
+
+                            <form action="{% url 'cart_add' product.id %}" method="post">
+                                {% csrf_token %}
+                                <div class="row align-items-end g-3">
+                                    <div class="col-4">
+                                        <label class="form-label fw-bold small">Quantity</label>
+                                        <input type="number" name="quantity" value="1" min="1" max="20" class="form-control form-control-lg text-center">
+                                    </div>
+                                    <div class="col-8">
+                                        <button type="submit" class="btn btn-success-custom btn-lg w-100">
+                                            <i class="bi bi-cart-plus me-2"></i> Add to Cart
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+
+                        {% else %}
+                            <div class="alert alert-danger d-inline-flex align-items-center">
+                                <i class="bi bi-x-circle-fill me-2"></i> Currently Out of Stock
+                            </div>
+                        {% endif %}
+                    </div>
+
+                    <div class="mt-4 pt-3 border-top">
+                        <div class="d-flex align-items-center gap-3 text-muted small">
+                            <span><i class="bi bi-truck me-1"></i> Fast Delivery</span>
+                            <span><i class="bi bi-shield-check me-1"></i> Freshness Guaranteed</span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 {% endblock %}
