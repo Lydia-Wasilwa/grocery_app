@@ -34,19 +34,20 @@
 ## Screenshots
 
 ### Homepage  
-![Homepage](screenshots/home.png)
+![Home](screenshots/home.PNG)
 
 ### Admin page  
-![Admin](screenshots\admin.PNG)
+![Admin](screenshots/admin.PNG)
 
 ### Admin Dashboard page
-![Admin dashboard](screenshots\admin_dashboard.PNG)
+![Admin dashboard](screenshots/admin_dashboard.PNG)
 
 ### Users page  
-![Users](screenshots\user.PNG)
+![Users](screenshots/user.PNG)
 
 ### Cart Page  
-![Cart Page](screenshots\cart.PNG)
+![Cart](screenshots/cart.PNG)
+
 ---
 
 ## ⚙️ Installation Guide
