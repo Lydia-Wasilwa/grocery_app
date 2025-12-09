@@ -62,7 +62,7 @@
                     <tr>
                         <td>#{{ order.id }}</td>
                         <td>{{ order.created_at|date:"M d, Y" }}</td>
-                        <td>${{ order.get_total_cost }}</td>
+                        <td>Ksh{{ order.get_total_cost }}</td>
                         <td>
                             {% if order.paid %}
                             <span class="badge bg-success rounded-pill">Paid ✅</span>

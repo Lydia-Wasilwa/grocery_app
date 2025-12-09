@@ -61,19 +61,25 @@
                         <small class="text-muted">{{ order.email }}</small>
                     </td>
                     <td><small>{{ order.address }}</small></td>
-                    <td>${{ order.get_total_cost }}</td>
+                    <td>Ksh{{ order.get_total_cost }}</td>
                     <td>
                         {% if order.paid %}
-                        <span class="badge bg-success">Paid</span>
+                            <span class="badge bg-success">Paid</span>
+                            
+                            <a href="{% url 'update_order_status' order.id 'shipped' %}" class="btn btn-sm btn-outline-dark ms-2" title="Notify: Received">
+                                <i class="bi bi-box-seam"></i> Notify Received
+                            </a>
                         {% else %}
-                        <span class="badge bg-warning text-dark">Pending</span>
+                            <span class="badge bg-warning text-dark">Pending</span>
+                            
+                            <a href="{% url 'update_order_status' order.id 'paid' %}" class="btn btn-sm btn-outline-success ms-2" title="Mark Paid">
+                                <i class="bi bi-check-lg"></i> Mark Paid
+                            </a>
                         {% endif %}
                     </td>
                 </tr>
                 {% empty %}
-                <tr>
-                    <td colspan="5" class="text-center py-3">No orders yet.</td>
-                </tr>
+                <tr><td colspan="5" class="text-center py-3">No orders yet.</td></tr>
                 {% endfor %}
             </tbody>
         </table>
@@ -98,7 +104,7 @@
                 {% for product in all_products %}
                 <tr>
                     <td>{{ product.name }}</td>
-                    <td>${{ product.price }}</td>
+                    <td>Ksh{{ product.price }}</td>
                     <td>
                         {% if product.available %}
                         <span class="text-success"><i class="bi bi-check-circle-fill"></i> In Stock</span>
@@ -109,22 +115,6 @@
                     <td>
                         <a href="{% url 'product_update' product.pk %}" class="btn btn-sm btn-outline-primary">Edit</a>
                         <a href="{% url 'product_delete' product.pk %}" class="btn btn-sm btn-outline-danger">Delete</a>
-                    </td>
-                    <td>#{{ order.id }}</td>
-                    <td>
-                        {% if order.paid %}
-                        <span class="badge bg-success">Paid</span>
-                        <a href="{% url 'update_order_status' order.id 'shipped' %}" class="btn btn-sm btn-outline-dark"
-                            title="Notify: Received">
-                            <i class="bi bi-box-seam"></i> Notify Received
-                        </a>
-                        {% else %}
-                        <span class="badge bg-warning text-dark">Pending</span>
-                        <a href="{% url 'update_order_status' order.id 'paid' %}" class="btn btn-sm btn-outline-success"
-                            title="Mark Paid">
-                            <i class="bi bi-check-lg"></i> Mark Paid
-                        </a>
-                        {% endif %}
                     </td>
                 </tr>
                 {% endfor %}

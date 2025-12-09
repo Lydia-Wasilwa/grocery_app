@@ -34,25 +34,22 @@
 ## 📸 Screenshots
 
 ### 🏠 Homepage  
-![Homepage](screenshots/homepage.png)
+![Homepage](screenshots/home.png)
 
-### 🛒 Product List  
-![Product List](screenshots/product_list.png)
+### Admin page  
+![Admin](screenshots/admin.png)
+
+### Admin Dashboard page
+![Admin dashboard](screenshots/admin_dashboard.png)
+
+### Users page  
+![Users](screenshots/user.png)
 
 ### 🧺 Cart Page  
 ![Cart Page](screenshots/cart.png)
-
-### ✔️ Checkout  
-![Checkout](screenshots/checkout.png)
-
-### 📊 Admin Dashboard  
-![Admin Dashboard](screenshots/admin_dashboard.png)
-
 ---
 
 ## ⚙️ Installation Guide
-
-Follow these steps to run the project locally:
 
 ### 1. Prerequisites
 Ensure Python is installed:

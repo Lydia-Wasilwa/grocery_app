@@ -7,18 +7,18 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto align-items-center">
                 <li class="nav-item"><a class="nav-link" href="{% url 'product_list' %}">Shop</a></li>
-                <li class="nav-item">
+                {% comment %} <li class="nav-item">
                     <a class="nav-link btn btn-light position-relative" href="{% url 'cart_detail' %}">
                         <i class="bi bi-cart3"></i> Cart
                         <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
                             {{ cart_item_count|default:"0" }}
                         </span>
                     </a>
-                </li>
+                </li> {% endcomment %}
                 {% if user.is_staff %}
                 <li class="nav-item">
                     <a href="{% url 'manager_dashboard' %}" class="btn btn-dark btn-sm me-2">
-                        <i class="bi bi-speedometer2"></i> Manager
+                        <i class="bi bi-speedometer2"></i> Admin
                     </a>
                 </li>
                 {% endif %}

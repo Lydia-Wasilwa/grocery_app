@@ -10,12 +10,12 @@
                     <h6 class="my-0">{{ item.product.name }}</h6>
                     <small class="text-muted">Qty: {{ item.quantity }}</small>
                 </div>
-                <span class="text-muted">${{ item.total_price }}</span>
+                <span class="text-muted">Ksh{{ item.total_price }}</span>
             </li>
             {% endfor %}
             <li class="list-group-item d-flex justify-content-between bg-light">
-                <span class="fw-bold">Total (USD)</span>
-                <span class="fw-bold text-success">${{ cart.get_total_price }}</span>
+                <span class="fw-bold">Total (KSH)</span>
+                <span class="fw-bold text-success">Ksh{{ cart.get_total_price }}</span>
             </li>
         </ul>
     </div>

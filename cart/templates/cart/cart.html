@@ -29,8 +29,8 @@
                     </div>
                 </form>
             </td>
-            <td>${{ item.price }}</td>
-            <td class="fw-bold">${{ item.total_price }}</td>
+            <td>Ksh{{ item.price }}</td>
+            <td class="fw-bold">Ksh{{ item.total_price }}</td>
             <td>
                 <a href="{% url 'cart_remove' item.product.id %}" class="btn btn-sm btn-outline-danger border-0">
                     <i class="bi bi-trash-fill"></i>
