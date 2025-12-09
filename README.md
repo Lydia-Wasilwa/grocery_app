@@ -31,22 +31,22 @@
 
 ---
 
-## 📸 Screenshots
+## Screenshots
 
-### 🏠 Homepage  
-![Homepage](screenshots/home.png)
+### Homepage  
+![Homepage](screenshots\home.png)
 
 ### Admin page  
-![Admin](screenshots/admin.png)
+![Admin](screenshots\admin.PNG)
 
 ### Admin Dashboard page
-![Admin dashboard](screenshots/admin_dashboard.png)
+![Admin dashboard](screenshots\admin_dashboard.PNG)
 
 ### Users page  
-![Users](screenshots/user.png)
+![Users](screenshots\user.PNG)
 
-### 🧺 Cart Page  
-![Cart Page](screenshots/cart.png)
+### Cart Page  
+![Cart Page](screenshots\cart.PNG)
 ---
 
 ## ⚙️ Installation Guide
